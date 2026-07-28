@@ -1,6 +1,6 @@
 namespace ZisusMCP.Functions.FileSystem;
 
-public static class Endpoints {
+public static class FileSystem {
 	public static void MapZisusMCPFileSystem(this WebApplication app) {
 		app.MapGet("/filesystem/list", ListDirectory);
 	}
