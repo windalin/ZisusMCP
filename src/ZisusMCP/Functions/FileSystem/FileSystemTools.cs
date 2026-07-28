@@ -2,17 +2,19 @@ namespace ZisusMCP.Functions.FileSystem;
 
 public static class Endpoints {
 	public static void MapZisusMCPFileSystem(this WebApplication app) {
-		app.MapGet("/filesystem/list", (string path) => {
-			if (!Directory.Exists(path)) {
-				return Results.NotFound($"Directory does not exist: {path}");
-			}
+		app.MapGet("/filesystem/list", ListDirectory);
+	}
 
-			var contents = Directory
-				.EnumerateFileSystemEntries(path)
-				.Select(Path.GetFileName)
-				.ToList();
+	private static IResult ListDirectory(string path) {
+		if (!Directory.Exists(path)) {
+			return Results.NotFound($"Directory does not exist: {path}");
+		}
 
-			return Results.Ok(contents);
-		});
+		var contents = Directory
+			.EnumerateFileSystemEntries(path)
+			.Select(Path.GetFileName)
+			.ToList();
+
+		return Results.Ok(contents);
 	}
 }

@@ -2,8 +2,8 @@ namespace ZisusMCP.Functions.Samples;
 
 public static class Samples {
 	public static void MapZisusMCPSamples(this WebApplication app) {
-		app.MapGet("/datetime", () => {
-			return DateTime.Now.ToString("O");
-		});
+		app.MapGet("/samples/datetime", GetDateTime);
 	}
+
+	private static string GetDateTime() => DateTime.Now.ToString("O");
 }
